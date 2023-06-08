@@ -32,6 +32,7 @@ var score = 0;
 var scoreElement = document.getElementById('score');
 var restartButton = document.getElementById('restart-button');
 var poopInterval;
+var initialPoopSpeed = poopSpeed;
 
 function poop() {
   var poop = {
@@ -107,7 +108,7 @@ function resetGame() {
     score = 0;
     poopList = [];
     mike.x = canvas.width / 2;
-    poopSpeed = 3;
+    poopSpeed = initialPoopSpeed;
     restartButton.style.display = 'none';
     clearInterval(poopInterval);
     gameLoop();
