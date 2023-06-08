@@ -92,6 +92,7 @@ function gameLoop() {
 function startGame() {
   score = 0;
   poopList = [];
+  poopSpeed = initialPoopSpeed; // Reset the poopSpeed variable
   gameLoop();
   poopInterval = setInterval(poop, 1000);
 }
@@ -105,22 +106,22 @@ function gameOver() {
 }
 
 function resetGame() {
-    score = 0;
-    poopList = [];
-    mike.x = canvas.width / 2;
-    poopSpeed = initialPoopSpeed;
-    restartButton.style.display = 'none';
-    clearInterval(poopInterval);
-    gameLoop();
-    poopInterval = setInterval(poop, 1000);
-  }
-  
-  function drawRestartButton() {
-    restartButton.style.display = 'block';
-    restartButton.addEventListener('click', function() {
-      resetGame();
-    });
-  }
+  score = 0;
+  poopList = [];
+  mike.x = canvas.width / 2;
+  poopSpeed = initialPoopSpeed; // Reset the poopSpeed variable
+  restartButton.style.display = 'none';
+  clearInterval(poopInterval);
+  gameLoop();
+  poopInterval = setInterval(poop, 1000);
+}
+
+function drawRestartButton() {
+  restartButton.style.display = 'block';
+  restartButton.addEventListener('click', function() {
+    resetGame();
+  });
+}
 
 document.addEventListener('keydown', function(event) {
   if (event.code === 'ArrowLeft') {
