@@ -107,6 +107,7 @@ function resetGame() {
     score = 0;
     poopList = [];
     mike.x = canvas.width / 2;
+    poopSpeed = 3;
     restartButton.style.display = 'none';
     clearInterval(poopInterval);
     gameLoop();
