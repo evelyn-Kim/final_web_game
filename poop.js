@@ -5,15 +5,9 @@ canvas.width = 853;
 canvas.height = 576;
 
 var img1 = new Image();
-img1.onload = function() {
-  init();
-};
 img1.src = 'img/mike.png';
 
 var img2 = new Image();
-img2.onload = function() {
-  init();
-};
 img2.src = 'img/poop.png';
 
 var mike = {
@@ -27,29 +21,12 @@ var mike = {
 };
 
 var poopList = [];
-var poopSpeed = 3;
 var score = 0;
 var scoreElement = document.getElementById('score');
 var restartButton = document.getElementById('restart-button');
 var poopInterval;
-var initialPoopSpeed = poopSpeed;
-
-function poop() {
-  var poop = {
-    x: Math.random() * (canvas.width - 20),
-    y: 0,
-    width: 20,
-    height: 20,
-    draw() {
-      ctx.drawImage(img2, this.x, this.y);
-    },
-    update() {
-      this.y += poopSpeed;
-      this.draw();
-    }
-  };
-  poopList.push(poop);
-}
+var initialPoopSpeed = 3;
+var poopSpeed = initialPoopSpeed;
 
 function drawScore() {
   scoreElement.textContent = 'Score: ' + score;
@@ -92,7 +69,7 @@ function gameLoop() {
 function startGame() {
   score = 0;
   poopList = [];
-  poopSpeed = initialPoopSpeed; // Reset the poopSpeed variable
+  poopSpeed = initialPoopSpeed;
   gameLoop();
   poopInterval = setInterval(poop, 1000);
 }
@@ -103,17 +80,17 @@ function gameOver() {
   ctx.fillStyle = 'black';
   ctx.fillText('Game Over', canvas.width / 2 - 100, canvas.height / 2);
   drawRestartButton();
+  clearInterval(poopInterval);
 }
 
 function resetGame() {
   score = 0;
   poopList = [];
   mike.x = canvas.width / 2;
-  poopSpeed = initialPoopSpeed; // Reset the poopSpeed variable
   restartButton.style.display = 'none';
-  clearInterval(poopInterval);
-  gameLoop();
-  poopInterval = setInterval(poop, 1000);
+  
+  poopSpeed = initialPoopSpeed; // 속도 초기화
+  startGame(); // 게임 재시작
 }
 
 function drawRestartButton() {
@@ -123,17 +100,33 @@ function drawRestartButton() {
   });
 }
 
+function poop() {
+  var poop = {
+    x: Math.random() * (canvas.width - 20),
+    y: 0,
+    width: 20,
+    height: 20,
+    draw() {
+      ctx.drawImage(img2, this.x, this.y);
+    },
+    update() {
+      this.y += poopSpeed;
+      this.draw();
+    }
+  };
+  poopList.push(poop);
+}
+
 document.addEventListener('keydown', function(event) {
   if (event.code === 'ArrowLeft') {
-    if (mike.x > 0) { // 좌측 벽 체크
-        mike.x -= 20;
+    if (mike.x > 0) {
+      mike.x -= 20;
     }
-}
-    else if (event.code === 'ArrowRight') {
-        if (mike.x + mike.width < canvas.width) { // 우측 벽 체크
-            mike.x += 20;
-        }
+  } else if (event.code === 'ArrowRight') {
+    if (mike.x + mike.width < canvas.width) {
+      mike.x += 20;
     }
+  }
 });
 
 startGame();
