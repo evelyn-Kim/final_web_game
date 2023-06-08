@@ -70,7 +70,7 @@ function gameOver() {
   isGameStarted = false;
   clearInterval(clickInterval);
   restartButton.style.display = 'block';
-  clickSpeed = originalClickSpeed; // 게임 오버 후 속도를 원래대로 복구
+  clickSpeed = originalClickSpeed; // 게임 오버 후 속도 복구
 }
 
 function restartGame() {
@@ -80,7 +80,7 @@ function restartGame() {
   missedClick = 0; // 놓친 횟수 초기화
   scoreElement.textContent = 'Score: ' + score;
   isGameStarted = false;
-  clickSpeed = originalClickSpeed; // 속도를 원래대로 복구
+  clickSpeed = originalClickSpeed; // 속도 복구
   renderGame();
 }
 
@@ -93,7 +93,7 @@ function clickhole(click) {
 }
 
 function increaseClickSpeed() {
-  clickSpeed -= 100; // 속도를 증가시킴 (100 밀리초씩 감소)
+  clickSpeed -= 100; // 속도를 증가시킴
   if (clickSpeed < 100) {
     clickSpeed = 100; // 속도가 최소값을 넘지 않도록 제한
   }
