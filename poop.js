@@ -25,8 +25,12 @@ var score = 0;
 var scoreElement = document.getElementById('score');
 var restartButton = document.getElementById('restart-button');
 var poopInterval;
-var initialPoopSpeed = 3;
+const initialPoopSpeed = 3;
 var poopSpeed = initialPoopSpeed;
+var maxPoopSpeed = 10;
+var poopSpeedIncrement = 0.1;
+var maxPoopCount = 10;
+var poopCountIncrement = 1;
 
 function drawScore() {
   scoreElement.textContent = 'Score: ' + score;
@@ -69,33 +73,32 @@ function gameLoop() {
 function startGame() {
   score = 0;
   poopList = [];
-  poopSpeed = initialPoopSpeed;
+  poopInterval = setInterval(poop, 1000 / poopSpeed);
   gameLoop();
-  poopInterval = setInterval(poop, 1000);
 }
 
 function gameOver() {
+  clearInterval(poopInterval);
   ctx.clearRect(0, 0, canvas.width, canvas.height);
   ctx.font = '48px Arial';
   ctx.fillStyle = 'black';
   ctx.fillText('Game Over', canvas.width / 2 - 100, canvas.height / 2);
   drawRestartButton();
-  clearInterval(poopInterval);
 }
 
 function resetGame() {
   score = 0;
   poopList = [];
-  mike.x = canvas.width / 2;
+  poopSpeed = initialPoopSpeed;
   restartButton.style.display = 'none';
-  
-  poopSpeed = initialPoopSpeed; // 속도 초기화
-  startGame(); // 게임 재시작
+  clearInterval(poopInterval);
+  poopInterval = null;
+  startGame();
 }
 
 function drawRestartButton() {
   restartButton.style.display = 'block';
-  restartButton.addEventListener('click', function() {
+  restartButton.addEventListener('click', function () {
     resetGame();
   });
 }
@@ -115,9 +118,17 @@ function poop() {
     }
   };
   poopList.push(poop);
+
+  if (poopList.length >= maxPoopCount) {
+    clearInterval(poopInterval);
+  }
+
+  if (poopSpeed < maxPoopSpeed) {
+    poopSpeed += poopSpeedIncrement;
+  }
 }
 
-document.addEventListener('keydown', function(event) {
+document.addEventListener('keydown', function (event) {
   if (event.code === 'ArrowLeft') {
     if (mike.x > 0) {
       mike.x -= 20;
