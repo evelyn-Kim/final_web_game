@@ -45,7 +45,7 @@ function generateRandomClick() {
   }, clickSpeed);
 
   // 점수에 따라 속도 증가
-  if (score >= 5) {
+  if (score >= 10) {
     increaseClickSpeed();
   }
   
