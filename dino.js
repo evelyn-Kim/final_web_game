@@ -98,7 +98,9 @@ function ani() {
 
   //점프 기능
   if (jumping == true) {
-    dino.y--;
+    if (dino.y > 0) {
+      dino.y--;
+    }
     jumping_timer++;
   }
   if (jumping == false) {
