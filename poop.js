@@ -5,9 +5,24 @@ canvas.width = 853;
 canvas.height = 576;
 
 var img1 = new Image();
+var img2 = new Image();
+
+function init() {
+  if (!img1.complete || !img2.complete) {
+    setTimeout(init, 50);
+    return;
+  }
+  startGame();
+}
+
+img1.onload = function() {
+  init();
+};
 img1.src = 'img/mike.png';
 
-var img2 = new Image();
+img2.onload = function() {
+  init();
+};
 img2.src = 'img/poop.png';
 
 var mike = {
@@ -25,12 +40,8 @@ var score = 0;
 var scoreElement = document.getElementById('score');
 var restartButton = document.getElementById('restart-button');
 var poopInterval;
-const initialPoopSpeed = 3;
-var poopSpeed = initialPoopSpeed;
-var maxPoopSpeed = 10;
-var poopSpeedIncrement = 0.1;
+var poopSpeed = 3;
 var maxPoopCount = 10;
-var poopCountIncrement = 1;
 
 function drawScore() {
   scoreElement.textContent = 'Score: ' + score;
@@ -70,9 +81,20 @@ function gameLoop() {
   requestAnimationFrame(gameLoop);
 }
 
+function resetGame() {
+  score = 0;
+  poopList = [];
+  restartButton.style.display = 'none';
+  clearInterval(poopInterval);
+  poopInterval = null;
+  poopSpeed = 3;
+  startGame();
+}
+
 function startGame() {
   score = 0;
   poopList = [];
+  poop();
   poopInterval = setInterval(poop, 1000 / poopSpeed);
   gameLoop();
 }
@@ -84,16 +106,6 @@ function gameOver() {
   ctx.fillStyle = 'black';
   ctx.fillText('Game Over', canvas.width / 2 - 100, canvas.height / 2);
   drawRestartButton();
-}
-
-function resetGame() {
-  score = 0;
-  poopList = [];
-  poopSpeed = initialPoopSpeed;
-  restartButton.style.display = 'none';
-  clearInterval(poopInterval);
-  poopInterval = null;
-  startGame();
 }
 
 function drawRestartButton() {
@@ -117,14 +129,11 @@ function poop() {
       this.draw();
     }
   };
+
   poopList.push(poop);
 
   if (poopList.length >= maxPoopCount) {
     clearInterval(poopInterval);
-  }
-
-  if (poopSpeed < maxPoopSpeed) {
-    poopSpeed += poopSpeedIncrement;
   }
 }
 
@@ -140,4 +149,4 @@ document.addEventListener('keydown', function (event) {
   }
 });
 
-startGame();
+init();
