@@ -56,7 +56,6 @@ var jumping_timer = 0;
 var animation;
 var randomInterval;
 var isGameOver = false;
- 
 var ground;
 
 function init() {
@@ -70,8 +69,8 @@ function init() {
 }
 
 function generateRandomInterval() {
-  randomInterval = Math.floor(Math.random() * 1 + 300);
-}  
+  randomInterval = Math.floor(Math.random() * 5 + 200);
+}
 
 function ani() {
   animation = requestAnimationFrame(ani);
@@ -96,16 +95,18 @@ function ani() {
     a.draw();
   });
 
+  var dinoSpeed = 1;
+
   //점프 기능
   if (jumping == true) {
     if (dino.y > 0) {
-      dino.y--;
+      dino.y -= dinoSpeed;
     }
     jumping_timer++;
   }
   if (jumping == false) {
     if (dino.y < 200) {
-      dino.y++;
+      dino.y += dinoSpeed;
     }
   }
   if (jumping_timer > 100) {
