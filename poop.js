@@ -83,11 +83,6 @@ function gameLoop() {
 
 function resetGame() {
   location.reload();
-  score = 0;
-  poopList = [];
-  restartButton.style.display = 'none';
-  clearInterval(poopInterval);
-  poopInterval = null;
   startGame();
 }
 
