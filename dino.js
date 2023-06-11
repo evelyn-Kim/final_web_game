@@ -56,7 +56,7 @@ var jumping_timer = 0;
 var animation;
 var randomInterval;
 var isGameOver = false;
-
+ 
 var ground;
 
 function init() {
@@ -70,7 +70,7 @@ function init() {
 }
 
 function generateRandomInterval() {
-  randomInterval = Math.floor(Math.random() * 0 + 300);
+  randomInterval = Math.floor(Math.random() * 1 + 300);
 }  
 
 function ani() {
