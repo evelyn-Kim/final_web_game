@@ -40,7 +40,7 @@ var score = 0;
 var scoreElement = document.getElementById('score');
 var restartButton = document.getElementById('restart-button');
 var poopInterval;
-var poopSpeed = 3;
+var poopSpeed = 2;
 var maxPoopCount = 10;
 
 function drawScore() {
@@ -82,12 +82,12 @@ function gameLoop() {
 }
 
 function resetGame() {
+  location.reload();
   score = 0;
   poopList = [];
   restartButton.style.display = 'none';
   clearInterval(poopInterval);
   poopInterval = null;
-  poopSpeed = 3;
   startGame();
 }
 
