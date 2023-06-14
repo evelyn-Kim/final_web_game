@@ -63,6 +63,14 @@ canvas {
     color: rgb(238, 238, 238);
 }
 
+#explain2 {
+    position: absolute;
+    bottom: 180px;
+    left: 53%;
+    transform: translateX(-50%);
+    color: rgb(238, 238, 238);
+}
+
 
 #game-title {
     text-align: center;
@@ -170,7 +178,8 @@ canvas {
 #score-container {
     position: fixed;
     top: 20%;
-    right: 40%;
+    left: 53%;
+    transform: translateX(-50%);
     text-align: center;
 }
 
