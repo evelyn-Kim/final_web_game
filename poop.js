@@ -83,6 +83,7 @@ function gameLoop() {
 
 function resetGame() {
   location.reload();
+  setTimeout(endGame, 800000);
   startGame();
 }
 
