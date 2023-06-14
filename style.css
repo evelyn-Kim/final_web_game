@@ -49,10 +49,20 @@ canvas {
 
 #explain {
     position: absolute;
-    bottom: 200px;
-    left: 45%;
+    bottom: 180px;
+    left: 50%;
+    transform: translateX(-50%);
     color: rgb(238, 238, 238);
 }
+
+#explain1 {
+    position: absolute;
+    bottom: 130px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: rgb(238, 238, 238);
+}
+
 
 #game-title {
     text-align: center;
