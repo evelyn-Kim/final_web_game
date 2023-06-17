@@ -171,5 +171,14 @@ function drawReplayButton() {
 }
 
 function resetGame() {
-  location.reload();
+  replayButton.style.display = 'none';
+  gameoverButton.style.display = 'none';
+  cactus_list = [];
+  timer = 0;
+  jumping_timer = 0;
+  isGameOver = false;
+  score = 0;
+  scoreElement.textContent = 'Score: ' + score; // 점수 초기화
+  cancelAnimationFrame(animation);
+  animation = requestAnimationFrame(ani);
 }
