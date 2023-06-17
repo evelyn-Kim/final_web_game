@@ -55,6 +55,14 @@ canvas {
     color: rgb(238, 238, 238);
 }
 
+#explain1 {
+    position: absolute;
+    bottom: 130px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: rgb(238, 238, 238);
+}
+
 #explain2 {
     position: absolute;
     bottom: 180px;
