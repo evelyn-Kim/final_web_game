@@ -26,9 +26,11 @@ var dino = {
   x: 20,
   y: 200,
   width: 50,
-  height: 80,
+  height: 70,
   draw() {
     ctx.drawImage(img1, this.x, this.y);
+    // ctx.fillStyle = 'green';
+    // ctx.fillRect(this.x, this.y, this.width,this.height);
   },
 };
 
@@ -75,6 +77,7 @@ function generateRandomInterval() {
 function ani() {
   animation = requestAnimationFrame(ani);
   timer++;
+  var cactusSpeed = 2;
 
   ctx.clearRect(0, 0, canvas.width, canvas.height);
 
@@ -89,7 +92,7 @@ function ani() {
       o.splice(i, 1);
       increaseScore();
     }
-    a.x--;
+    a.x -= cactusSpeed;
 
     col(dino, a);
     a.draw();
@@ -178,7 +181,8 @@ function resetGame() {
   jumping_timer = 0;
   isGameOver = false;
   score = 0;
-  scoreElement.textContent = 'Score: ' + score; // 점수 초기화
+  scoreElement.textContent = 'Score: ' + score;
+
   cancelAnimationFrame(animation);
   animation = requestAnimationFrame(ani);
 }
